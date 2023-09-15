@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  box-sizing: border-box;
+
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.productMenu {
+  background-image: url("./assests/Images/productmenu.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: auto;
+  height: auto;
+}
+.custom-select {
+  outline: none !important;
+  border-radius: none !important;
+  border: none !important;
+}
+.custom-select::before {
+
+  outline: none !important;
+  border-radius: none !important;
+  border: none !important;
+}
+
+/* Style ::after pseudo-element */
+.custom-select::after {
+ 
+  outline: none !important;
+  border-radius: none !important;
+  border: none !important;
+}
+.slick-slide img {
+  margin: auto;
+}
+.sliderImage1  {
+  background-image: url("./assests/Images/1.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vh;
+  height: 50vh;
+}
+.sliderImage2  {
+  background-image: url("./assests/Images/2.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: auto;
+  height: auto;
+}
+.sliderImage3  {
+  background-image: url("./assests/Images/3.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: auto;
+  height: auto;
+}
+.slick-arrow {
+  color:rgb(206, 195, 195)!important;
+  font-size: 50px!important;
+  width: 30px!important;
+  height: 30px!important;
+  transition: "0.2s"}
+  
+  .slick-arrow:hover {
+    background-Color: cyan.500;
+    color: yellow!important
+  }
+
+  
+  .slick-prev {
+    /* left: 3% !important; */
+    z-index: 5!important;
+  }
+  .slick-next {
+    /* right: 3% !important; */
+    z-index:  5!important;
+  }
+  .home-banner-bg{
+    background-image: url("./assests/Images/home-banner.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: auto;
+    height: auto;
+    background-attachment:inherit ;
+  }
