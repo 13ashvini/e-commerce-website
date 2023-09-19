@@ -1,22 +1,8 @@
-// import React from 'react'
-
-// const Login = () => {
-//   return (
-//     <div>
-      
-//     </div>
-//   )
-// }
-
-// export default Login
 import { FormikProps } from "formik";
 import { Checkbox } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ATMTextField from "../../Components/atoms/ATMFormFields/ATMTextField/ATMTextField";
 import { LoginProps } from "./LoginWrapper";
-// import Register from "./Register";
-// import { useLoginMutation } from "./authApi";
-// import { toast } from "react-toastify";
 type Props={
 loginProps:FormikProps<LoginProps>
 }
@@ -24,22 +10,6 @@ loginProps:FormikProps<LoginProps>
 
 const Login = ({loginProps}:Props) => {
   const {values,setFieldValue}=loginProps
-//   const [
-//     loginUser,
-//     {
-//       data: loginData,
-//       isSuccess: isLoginSuccess,
-//       isError: isLoginErrror,
-//       error: loginError,
-//     },
-//   ] = useLoginMutation();
-
-//   useEffect(() => {
-//     if (isLoginSuccess) {
-//       toast.success("User Login successfully");
-//     }
-//   });
-
   return (
     <div className="p-5 shadow-lg ">
       <div className="flex flex-col gap-5">

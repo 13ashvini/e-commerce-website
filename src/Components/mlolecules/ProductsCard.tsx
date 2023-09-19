@@ -6,6 +6,8 @@ type Props = {
   productName: string;
   productPrice: string;
   isLoading?:boolean
+  buttontitle:string
+  buttonOnClick:(e:any)=>void
 };
 
 const ProductsCard = ({
@@ -13,7 +15,9 @@ const ProductsCard = ({
   productName,
   productPrice,
   productRating,
-  isLoading
+  isLoading,
+  buttontitle,
+  buttonOnClick
 }: Props) => {
   return (
     <div className="w-full   hover:shadow-lg hover:rounded-lg h-full p-3 group flex flex-col gap-5 hover:bg-white">
@@ -57,9 +61,11 @@ const ProductsCard = ({
       </span>
      </div>
       <div className=" flex pb-5 bg-white w-full gap-2 transition transform invisible translate-y-0 ease-out  group-hover:visible group-hover:translate-y-5">
-        <h1 className="bg-[#F7F7F7] font-bold border hover:bg-yellow-500 py-[6px] flex items-center rounded-sm px-5 border-gray-300  text-[12px] rounded">
-          Add To Cart
-        </h1>
+        <button className="bg-[#F7F7F7] font-bold border hover:bg-yellow-500 py-[6px] flex items-center rounded-sm px-5 border-gray-300  text-[12px] rounded"
+        onClick={buttonOnClick}
+        >
+        {buttontitle}
+        </button>
         <div className="bg-[#F7F7F7] border hover:bg-yellow-500 border-gray-300 rounded-sm  text-gray-600 px-3 flex items-center">
          <span> <AiOutlineHeart /></span>
         </div>

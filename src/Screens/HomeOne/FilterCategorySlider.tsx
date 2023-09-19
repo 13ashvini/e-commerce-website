@@ -1,84 +1,88 @@
-// import React from 'react'
-
-// const FilterCategorySlider = () => {
-//   return (
-//     <div>
-      
-//     </div>
-//   )
-// }
-
-// export default FilterCategorySlider
 import React, { useEffect, useState } from "react";
 import ProductsCard from "../../Components/mlolecules/ProductsCard";
 import Slider from "react-slick";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { setIsLoading, setItems } from "../../redux/Slice/CategorySlice";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import { useFilterCategoryQuery } from "../../Service/CategoryService";
 import { useNavigate } from "react-router-dom";
+import { addToCart } from "../../redux/Slice/CartSlice";
 
 type Props = {
   categoryId: any;
 };
 
 const FilterCategorySlider = ({ categoryId }: Props) => {
-  const dispatch=useDispatch()
-  const navigate=useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [productCategory, setProductsCategory] = useState<any>([]);
-    // const {items,isLoading,isError}=useSelector((state:RootState)=>(state.category))
-    const {data:category,isLoading:isCategoryLoading,isFetching:isCategoryFetching}=useFilterCategoryQuery(categoryId) 
-  console.log(category, "productsData");
-  console.log("itmesssss",productCategory)
+  const { cart } = useSelector((state: RootState) => state.cart);
+  const {
+    data: category,
+    isLoading: isCategoryLoading,
+    isFetching: isCategoryFetching,
+  } = useFilterCategoryQuery(categoryId);
+  const handleAddToCart = (product: any) => {
+    const isProductInCart = cart.some((item: any) => item?.id === product?.id);
+    if (product) {
+      if (!isProductInCart) {
+        dispatch(addToCart(product));
+      }
+      navigate("/cart");
+    }
+  };
   //PRODUCT BY CATEGORY
   useEffect(() => {
     if (!isCategoryLoading || !isCategoryFetching) {
-       setProductsCategory(category || [])
-       setIsLoading(false)
+      setProductsCategory(category || []);
+      setIsLoading(false);
     } else {
-       setIsLoading(isLoading)
-     }
-  }, [
-    isCategoryLoading,
-    isCategoryFetching,
-    category,
-  ]);
-  const settings = {
+      setIsLoading(true);
+    }
+  }, [isCategoryLoading, isCategoryFetching, category]);
 
-    arrow:true,
+  const settings = {
+    arrow: true,
     infinite: true,
     speed: 500,
     slidesToShow: 5,
     slidesToScroll: 3,
-    prevArrow: <MdKeyboardArrowLeft />, // Optionally customize previous arrow
-    nextArrow: <MdKeyboardArrowRight />, // Optionally customize next arrow
-  
+    prevArrow: <MdKeyboardArrowLeft />, 
+    nextArrow: <MdKeyboardArrowRight />, 
   };
   return (
     <div>
-       <div className="flex px-5 ">
-           <Slider {...settings} className="w-full h-[300px]">
-             {productCategory.map((product:any) => {
-               return (
-                    <div className="flex"
-                   key={product?.id} onClick={()=>{navigate(`/singleProduct/${product.id}`)}}
-                   >
-                     <ProductsCard
-                       productImage={product?.images[0]}
-                       productPrice={product?.price}
-                       productName={product?.title}
-                       productRating={product?.productRating}
-                     />
-                   </div>
-                 
-               );
-             })}
-              </Slider>
-           </div>
+      <div className="flex px-5 ">
+        <Slider {...settings} className="w-full h-[300px]">
+          {productCategory.map((product: any) => {
+            return (
+              <div
+                className="flex"
+                key={product?.id}
+                onClick={() => {
+                  navigate(`/singleProduct/${product.id}`);
+                }}
+              >
+                <ProductsCard
+                  productImage={product?.images[0]}
+                  productPrice={product?.price}
+                  productName={product?.title}
+                  productRating={product?.productRating}
+                  buttonOnClick={(e: any) => {
+                    handleAddToCart(product);
+                    e.stopPropagation();
+                  }}
+                  buttontitle={"Add to Cart"}
+                  isLoading={isLoading}
+                />
+              </div>
+            );
+          })}
+        </Slider>
+      </div>
     </div>
   );
 };

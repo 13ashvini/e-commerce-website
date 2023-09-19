@@ -3,12 +3,11 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import HomeOneWrapper from './Screens/HomeOne/HomeOneWrapper'
 import {Routes,Route,BrowserRouter} from 'react-router-dom'
-import LoginWrapper from './Screens/Login/LoginWrapper'
-import RegisterWrapper from './Screens/Register/RegisterWrapper'
 import MyAccount from './Screens/MyAccount/MyAccount'
-import Product from './Screens/Product/Product'
 import ProductWrapper from './Screens/Product/ProductWrapper'
 import ProductCart from './Screens/Cart/ProductCart'
+import Wishlist from './Screens/Wishlist/Wishlist'
+import CheckoutWrapper from './Screens/Checkout/CheckoutWrapper'
 
 const PageRouting = () => {
   return (
@@ -20,6 +19,8 @@ const PageRouting = () => {
          <Route path="/login" element={<MyAccount/>}/>
          <Route path="/singleProduct/:productId" element={<ProductWrapper/>}/>
          <Route path="/cart" element={<ProductCart/>}/>
+         <Route path="/wishlist" element={<Wishlist/>}/>
+         <Route path="/checkout" element={<CheckoutWrapper/>}/>
         </Routes>
       </BrowserRouter>
        

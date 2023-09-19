@@ -170,6 +170,8 @@ Meito Accessories 2018</div></div>
                 return (
                   <div className="flex" style={{}}>
                     <ProductsCard
+                    buttonOnClick={()=>{}}
+                    buttontitle="Add to Cart"
                       productImage={product?.images[0]}
                       productPrice={product?.price}
                       productName={product?.title}

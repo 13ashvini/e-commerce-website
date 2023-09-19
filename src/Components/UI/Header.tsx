@@ -10,12 +10,16 @@ import ATMAccordian from "../atoms/ATMAccordian/ATMAccordian";
 import HomeCartComponent from "./HomeCartComponent";
 import ATMOnClickAccordian from "../atoms/ATMOnClickAccordian/ATMOnClickAccordian";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const Header = () => {
   const [selectCurrency, setSelectCurrency] = useState("USD $");
   const [selectLanguage, setSelectLanguage] = useState("English");
   const [searchProduct, setSearchProduct] = useState("");
- const naviagte=useNavigate()
+  const {items}=useSelector((state:RootState)=>(state.wishlist))
+  const {cart}=useSelector((state:RootState)=>(state.cart))
+ const navigate=useNavigate()
   const options = [
     {
       value: "USD $",
@@ -43,50 +47,13 @@ const Header = () => {
           Telephone Enquiry:(+123) 123 321 345
         </div>
         <div className="flex lg:gap-5 sm:gap-1 md:gap-3 flex justify-center">
-          {/* <div className="border-r border-gray-300 px-2 ">
-            <Accordion
-              style={{
-                width: "100%",
-                backgroundColor: "transparent",
-                zIndex: 6,
-                boxShadow: "none",
-                padding: "0px 10px",
-                maxHeight: 40,
-                alignContent: "center",
-              }}
-            >
-              <AccordionSummary
-                expandIcon={<IoIosArrowDown />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-              >
-                <h1>Setting</h1>
-              </AccordionSummary>
-              <AccordionDetails
-                style={{ borderTop: "1px #FED700 solid", zIndex: 7 }}
-              >
-                <div className="flex flex-col gap-2">
-                  <div className="hover:bg-[#FED700]  px-2 hover:text-[#FEE9BD]">
-                    My Account
-                  </div>
-                  <div className="hover:bg-[#FED700]  px-2 hover:text-[#FEE9BD]">
-                    Checkout{" "}
-                  </div>
-
-                  <div className="hover:bg-[#FED700]  px-2 hover:text-[#FEE9BD]">
-                    Login
-                  </div>
-                </div>
-              </AccordionDetails>
-            </Accordion>
-          </div> */}
             <ATMOnClickAccordian title="setting"
             titleExtraClass=""
             className="flex gap-8 w-40 px-3 py-3"
             >
             <div className="flex flex-col gap-2 text-[#ADADAD] border-t border-yellow-500 ">
                   <div className="hover:bg-[#FED700]  px-2 hover:text-[#FEE9BD]"
-                  onClick={()=>{naviagte("/login")}}
+                  onClick={()=>{navigate("/login")}}
                   >
                     My Account
                   </div>
@@ -128,7 +95,7 @@ const Header = () => {
       <div className="flex gap-10 justify-between px-10 py-8">
         <div className="flex-1 flex gap-[100px] items-center">
           <div>
-            <img src={logo} alt="logo"></img>
+            <img src={logo} alt="logo"  onClick={()=>{navigate("/")}} className="cursor-pointer"></img>
           </div>
           <div className="flex-1 flex border border-gray-300">
           <ATMSelect
@@ -160,9 +127,9 @@ const Header = () => {
           </div>
         </div>
         <div className="flex gap-5">
-          <div className="border border-gray-300 items-center flex p-0 px-3 z-0 relative ">
+          <div className="border border-gray-300 items-center flex p-0 px-3 z-0 relative cursor-pointer " onClick={()=>{navigate("/wishlist")}}>
             <span className="bg-yellow-500 text-[13px] rounded-full w-[18px] h-[18px] grid z-100 absolute top-[-3px] left-[-3px]  content-center px-1">
-              0
+             {items.length}
             </span>
             <span>
               <AiOutlineHeart />
@@ -170,10 +137,10 @@ const Header = () => {
           </div>
           <div className="border bg-[#E80F0F]  border-gray-300 items-center flex p-0 px-3 z-0 relative ">
             <span className="bg-yellow-500 text-[13px] rounded-full w-[18px] h-[18px] grid z-100 absolute top-[-3px] left-[-3px]  content-center px-1">
-              0
+            {cart.length}
             </span>
            
-            <HomeCartComponent/>
+            <HomeCartComponent cardProductData={cart} />
           </div>
         </div>
       </div>

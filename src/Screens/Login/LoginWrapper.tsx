@@ -34,8 +34,6 @@ const handleSubmit = (
     if (res?.error) {
       toast.error(res?.error?.data?.message);
       setSubmitting(false);
-    
-      console.log("erRR3",res?.error?.data?.message)
     } else {
       if (res?.data) {
         console.log("message",res)

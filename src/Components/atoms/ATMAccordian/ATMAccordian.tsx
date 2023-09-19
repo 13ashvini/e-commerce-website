@@ -22,8 +22,8 @@ const ATMAccordian: React.FC<AccordionProps> = ({ title, children,className ,tit
       className={` items-center w-full z-1000   ${
         isOpenAccordian ? 'max-h-screen ' : 'max-h-5  overflow-hidden'
       }`}
-      onMouseEnter={toggleAccordion}
-      onMouseLeave={toggleAccordion}
+      onMouseOver={toggleAccordion}
+      // onMouseLeave={toggleAccordion}
     >
         <div className={twMerge(`flex flex-col gap-2 items-center  ${extraClass} `)}>
       <div className={twMerge(`flex gap-2 items-center ${titleExtraClass}`)}>

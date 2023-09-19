@@ -11,8 +11,10 @@ import { ProductListResponse } from "../../model/Product.model";
 import ImageGallery from "react-image-gallery";
 import { RootState } from "../../redux/store";
 import { addToCart } from "../../redux/Slice/CartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addToWishlist } from "../../redux/Slice/WishlistSlice";
+import {BsFillHeartFill} from "react-icons/bs"
 // import "react-image-gallery/styles/css/image-gallery.css";
 type Props = {
   productDetail:ProductListResponse 
@@ -21,13 +23,32 @@ type Props = {
 const Product = ({productDetail}: Props) => {
   const navigate=useNavigate()
     const [selectDimension,setSelectDimension]=useState("40x60cm")
-  //  const {cart}=((state:RootState)=>(state.cart))
+    const {cart}=useSelector((state:RootState)=>(state.cart))
+    const {items}=useSelector((state:RootState)=>(state.wishlist))
    const dispatch=useDispatch()
+   const isProductInCart = cart.some((item: any) => item?.id === productDetail?.id);
+   const isProductWishlist = items.some((item: any) => item?.id === productDetail?.id);
+   const handleAddToCart = () => {
+     if (productDetail) {
+       if (!isProductInCart) {
+         dispatch(addToCart(productDetail));
+       }
+       navigate("/cart");
+     }
+   };
+   const handleAddToWishlist = () => {
+    if (productDetail) {
+      if (!isProductWishlist) {
+        dispatch(addToWishlist(productDetail));
+      }
+      // navigate("/wishlist");
+    }
+  };
   return (
     <div>
       <Header />
-      <div className="flex gap-8 px-10 py-3 w-full  h-full">
-        <div className="">
+      <div className="grid  sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 px-10 py-3 w-full  h-full">
+        <div className="w-full h-full">
           <img src={productDetail?.images[0] ||""} alt="" className="flex items-center w-full" />
         </div>
         <div className="flex flex-col gap-4">
@@ -81,9 +102,9 @@ const Product = ({productDetail}: Props) => {
 
                 <div>
                   <button className="hover:bg-[#363F4D] hover:text-white bg-yellow-500 px-7 py-3 w-fit  text-white rounded"
-                  onClick={()=>{navigate("/cart") ;dispatch(addToCart(productDetail))}}
+                  onClick={()=>{handleAddToCart()} }
                   >
-                    Add to Cart
+                    {isProductInCart ? "Go to Cart" :"Add to Cart"}
                   </button>
                 </div>
                 <div>
@@ -94,11 +115,22 @@ const Product = ({productDetail}: Props) => {
               </div>
             </div>
           </div>
-          <div className="flex text-[#888888] items-center gap-3 text-[14px]">
-            <span>
+          <div className="flex text-[#888888] items-center gap-3 text-[14px]"
+          onClick={()=>{handleAddToWishlist()}}
+          >
+            {!isProductWishlist ? <div className="flex gap-2 items-center">
+              <span>
               <AiOutlineHeart />
-            </span>{" "}
+            </span>
             <span>Add To Wishlist</span>
+            </div>:<div className="flex gap-2 items-center" >
+            <span className="text-red-400">
+              <BsFillHeartFill/>
+            </span>
+            <span className="text-red-400">Added To Wishlist</span>
+            </div>
+           }
+            
           </div>
           <div className="flex flex-col gap-3 text-[#888888]">
           <div className="border-b border-gray-300 py-4 flex gap-3 items-center"><span><LuCheckSquare/></span>Security policy (edit with Customer reassurance module)</div>
