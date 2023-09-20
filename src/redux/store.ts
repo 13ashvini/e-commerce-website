@@ -4,6 +4,7 @@ import CategorySlice from './Slice/CategorySlice'
 import CategoriesSlice from './Slice/CategoriesSlice'
 import CartSlice from './Slice/CartSlice'
 import WishlistSlice from './Slice/WishlistSlice'
+import CategoryPorductSlice from './Slice/CategoryPorductSlice'
 // ...
 const store = configureStore({
   reducer:{
@@ -11,6 +12,7 @@ const store = configureStore({
    cart:CartSlice,
    wishlist:WishlistSlice,
    categories:CategoriesSlice,
+   categoryProduct:CategoryPorductSlice,
     [apiSlice.reducerPath] : apiSlice.reducer
   },
 

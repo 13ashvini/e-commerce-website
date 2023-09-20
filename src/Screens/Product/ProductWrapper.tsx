@@ -16,7 +16,7 @@ const ProductWrapper = (props: Props) => {
   setProductDetail(product || null )
   setIsloading(false)
  }else{
-  setIsloading(isLoading)
+  setIsloading(true)
  }
   },[isProductDetailLoading,isProductDetailFetching,product])
   console.log("productDetail",product)
@@ -25,6 +25,7 @@ const ProductWrapper = (props: Props) => {
     <div>
       <Product 
       productDetail={productDetail}
+      isLoading={isLoading}
       />
     </div>
   )

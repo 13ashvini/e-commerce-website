@@ -342,7 +342,7 @@ const Header = () => {
             </ATMAccordian>
           </li>
           <li className="hover:text-white font-medium">About US</li>
-          <li className="hover:text-white font-medium">Contact</li>
+          <li className="hover:text-white font-medium" onClick={()=>{navigate("/contact-us")}}>Contact</li>
           <li className="hover:text-white font-medium">SmartWatch</li>
           <li className="hover:text-white font-medium">Accessories</li>
         </ul>

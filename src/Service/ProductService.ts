@@ -12,9 +12,18 @@ const ProductService= apiSlice.injectEndpoints({
            
         }),
       }),
+      // get Product by Catgery wise With pagination
+      getProductByCategory: builder.query({
+        providesTag: ["product"],
+        query: ({id,offset,limit}:{id:string,offset:number,limit:number}) => ({
+           url:`/products/?categoryId=${id}&offset=${offset}&limit=${limit}`,
+           method:"GET",
+           
+        }),
+      }),
     }),
    
   });
   
   // Corrected export
-export const {useGetProductByIdQuery} = ProductService
+export const {useGetProductByIdQuery,useGetProductByCategoryQuery} = ProductService

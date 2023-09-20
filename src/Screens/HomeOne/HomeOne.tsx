@@ -11,6 +11,7 @@ import homeMobileBanner from "../../assests/Images/homeMobileBanner.jpg";
 import homeElectroicsBanner from "../../assests/Images/homeElectronicBanner.jpg";
 import homeBanner from "../../assests/Images/home-banner.jpg";
 import FilterCategorySlider from "./FilterCategorySlider";
+import { useNavigate } from "react-router-dom";
 type ProductsProps = {
   images: string[];
   productRating: string;
@@ -33,15 +34,11 @@ type Props = {
 const HomeOne = ({
   productsData,
   isLoading,
-  electronicData,
-  categoryData,
+    categoryData,
 }: Props) => {
   const [activeTab, setActiveTab] = useState("newArrival");
-  console.log("data", categoryData);
-  console.log("data1", categoryData[0]);
-  console.log("data2", categoryData[1]);
-
-  const handleTabClick = (tab: any) => {
+  const navigate=useNavigate()
+const handleTabClick = (tab: any) => {
     setActiveTab(tab);
   };
   const settings = {
@@ -85,13 +82,15 @@ const HomeOne = ({
           {categoryData.map((el, index) => {
             return (
               <div className="px-10 py-4">
-                <div className="hover:text-black text-[25px] font-medium text-[#888888]">
+                <div className="hover:text-black text-[25px] font-medium text-[#888888]"
+                onClick={()=>{navigate(`/category/${el?.id}`)}}
+                >
                   {el.name}
                 </div>
 
-                <div>
-                  <FilterCategorySlider categoryId={el?.id} />
-                </div>
+               {isLoading?"loading...." : <div>
+               <FilterCategorySlider categoryId={el?.id} />
+                </div>}
                 {index === 0 && (
                   <div className="grid lg:grid-cols-3 sm:grid-cols-1  gap-3  px-[60px] py-3">
                     <div>

@@ -2,7 +2,7 @@ import { IoMdStarOutline } from "react-icons/io";
 import { AiOutlineEye, AiOutlineHeart } from "react-icons/ai";
 type Props = {
   productImage: string;
-  productRating: string;
+  productRating?: string;
   productName: string;
   productPrice: string;
   isLoading?:boolean
