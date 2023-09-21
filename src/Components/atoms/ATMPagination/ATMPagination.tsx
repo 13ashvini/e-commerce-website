@@ -1,14 +1,3 @@
-// import React from 'react'
-
-// type Props = {}
-
-// const ATMPagination = (props: Props) => {
-//   return (
-//     <div>ATMPagination</div>
-//   )
-// }
-
-// export default ATMPagination
 import React, { useState } from 'react';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
@@ -18,15 +7,34 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 
-type PaginationTypes={
-    page:number
-    count:number
-    onPageChange?:(value:any)=>void,
-    onRowsPerPageChange?:(value:any)=>void
-   rowsPerPage?:number
-}
-const ATMTransactionPagination = ({ page, count,onPageChange,onRowsPerPageChange,rowsPerPage }:PaginationTypes) => {
+type PaginationTypes = {
+  page: number;
+  count: number;
+  onPageChange?: (value: number) => void;
+  onRowsPerPageChange?: (value: number) => void;
+  rowsPerPage?: number;
+};
 
+const ATMTransactionPagination = ({
+  page,
+  count,
+  onPageChange,
+  onRowsPerPageChange,
+  rowsPerPage = 10, // Default rows per page
+}: PaginationTypes) => {
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    
+    if (onPageChange) {
+      onPageChange(value);
+    }
+  };
+
+  const handleRowsPerPageChange = (event:any) => {
+    const newRowsPerPage = event.target.value as number;
+    if (onRowsPerPageChange) {
+      onRowsPerPageChange(newRowsPerPage);
+    }
+  };
 
   return (
     <Box display="flex" justifyContent="space-between" alignItems="center" mt={2}>
@@ -34,16 +42,10 @@ const ATMTransactionPagination = ({ page, count,onPageChange,onRowsPerPageChange
         <Pagination
           page={page}
           count={count}
-          onChange={onPageChange}
-        //   rowsPerPage={rowsPerPage}
-        //   onRowsPerPageChange={onRowsPerPageChange}
+          onChange={handlePageChange}
           shape="rounded"
           renderItem={(item) => (
-            <PaginationItem
-              component="button"
-             
-              {...item}
-            />
+            <PaginationItem component="button" {...item} />
           )}
         />
       </Box>
@@ -52,7 +54,7 @@ const ATMTransactionPagination = ({ page, count,onPageChange,onRowsPerPageChange
           <InputLabel htmlFor="rows-per-page">Rows per page</InputLabel>
           <Select
             value={rowsPerPage}
-            onChange={onPageChange}
+            onChange={handleRowsPerPageChange}
             label="Rows per page"
             inputProps={{
               name: 'rowsPerPage',

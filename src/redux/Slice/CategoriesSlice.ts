@@ -15,7 +15,7 @@ const initialState: CategoriesStateProps = {
   isLoading: true,
   isError: false,
 };
-
+  
 const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
